@@ -28,13 +28,13 @@ export default function Home() {
       <section className="container py-20 md:py-32">
         <div className="text-center max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            XHAND1 全驱灵巧手
+            XHAND1 全直驱灵巧手
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8">
-            12自由度 · 270度触觉感知 · 80N抓握力
+            12自由度 · 高分辨率触觉感知 · 支持反驱
           </p>
           <p className="text-lg text-muted-foreground mb-10">
-            星动量科技推出的高仿生灵巧手，为人形机器人和工业自动化提供精密操作能力
+            星动纪元推出的高仿生灵巧手，为人形机器人和工业自动化提供精密操作能力
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/docs/quickstart/unboxing">
