@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { BookOpen, Code, Rocket, HelpCircle, Download, Zap } from "lucide-react";
+import { BookOpen, Code, Rocket, HelpCircle, Download, Zap, Gamepad2 } from "lucide-react";
 import { APP_LOGO, APP_TITLE } from "@/const";
 
 export default function Home() {
@@ -100,12 +100,12 @@ export default function Home() {
               </p>
             </div>
           </Link>
-          <Link href="/docs/quickstart/unboxing">
+          <Link href="/docs/quickstart/host-software">
             <div className="border rounded-lg p-6 hover:border-primary transition-colors cursor-pointer h-full">
               <Rocket className="h-8 w-8 text-primary mb-4" />
               <h3 className="text-lg font-semibold mb-2">快速入门</h3>
               <p className="text-sm text-muted-foreground">
-                从开箱到运行第一个程序，快速上手XHAND1
+                上位机软件使用，从开箱到第一次测试运行
               </p>
             </div>
           </Link>
@@ -114,7 +114,16 @@ export default function Home() {
               <Code className="h-8 w-8 text-primary mb-4" />
               <h3 className="text-lg font-semibold mb-2">SDK开发</h3>
               <p className="text-sm text-muted-foreground">
-                Python、C++、ROS多语言SDK，完整的API参考
+                Python、C++、ROS1、ROS2多语言SDK支持
+              </p>
+            </div>
+          </Link>
+          <Link href="/docs/teleoperation/overview">
+            <div className="border rounded-lg p-6 hover:border-primary transition-colors cursor-pointer h-full">
+              <Gamepad2 className="h-8 w-8 text-primary mb-4" />
+              <h3 className="text-lg font-semibold mb-2">遥操作</h3>
+              <p className="text-sm text-muted-foreground">
+                VR头显、动捕手套、外骨骼手套多种方案
               </p>
             </div>
           </Link>
