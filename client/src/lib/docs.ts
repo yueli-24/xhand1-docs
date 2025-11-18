@@ -628,14 +628,40 @@ A:
     {
       id: "python",
       title: "Python SDK",
-      path: "/docs/sdk/python"
-      // 保留原有content
+      path: "/docs/sdk/python",
+      content: `# Python SDK
+
+XHAND1 Python SDK 提供了简洁易用的 Python 接口，适合快速原型开发和算法验证。通过 Python SDK，您可以轻松实现位置控制、力控制、触觉数据读取等功能。
+
+## 主要特性
+
+- 简洁的 API 设计，易于上手
+- 支持异步和同步控制模式
+- 完整的触觉传感器数据访问
+- 丰富的示例代码和文档
+
+## 安装方法
+
+请参考 SDK 架构概述中的安装指南，或访问下载中心获取最新版本。`
     },
     {
       id: "cpp",
       title: "C++ SDK",
-      path: "/docs/sdk/cpp"
-      // 保留原有content
+      path: "/docs/sdk/cpp",
+      content: `# C++ SDK
+
+XHAND1 C++ SDK 提供了高性能的 C++ 接口，适合实时控制和高频响应应用。C++ SDK 采用现代 C++17 标准，提供了低延迟、高吞吐的控制能力。
+
+## 主要特性
+
+- 高性能实时控制
+- 低延迟通信协议
+- 线程安全设计
+- 完整的类型安全
+
+## 编译和集成
+
+请参考 SDK 架构概述中的编译指南，或访问下载中心获取最新版本。`
     },
     {
       id: "ros",
