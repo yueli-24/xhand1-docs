@@ -2,7 +2,7 @@ export { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 
 export const APP_TITLE = import.meta.env.VITE_APP_TITLE || "App";
 
-export const APP_LOGO = "https://placehold.co/200x50/6366f1/ffffff?text=XHAND1";
+export const APP_LOGO = "https://www.robotera.com/static/pc/default/images/logo2.svg";
 
 // Generate login URL at runtime so redirect URI reflects the current origin.
 export const getLoginUrl = () => {

@@ -165,10 +165,10 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t py-8 mt-auto">
         <div className="container text-center text-sm text-muted-foreground">
-          <p>© 2024 星动量科技. All rights reserved.</p>
+          <p>© 2024 北京星动纪元科技有限公司 版权所有京ICP备2023021939号</p>
           <p className="mt-2">
-            <a href="mailto:support@xingdong.tech" className="hover:text-primary">
-              support@xingdong.tech
+            <a href="mailto:support@robotera.com" className="hover:text-primary">
+              support@robotera.com
             </a>
           </p>
         </div>
