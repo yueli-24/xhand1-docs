@@ -694,9 +694,9 @@ XHAND1 C++ SDK 提供了高性能的 C++ 接口，适合实时控制和高频响
 请参考 SDK 架构概述中的编译指南，或访问下载中心获取最新版本。`
     },
     {
-      id: "ros1",
+      id: "ros",
       title: "ROS1 集成",
-      path: "/docs/sdk/ros1",
+      path: "/docs/sdk/ros",
       content: `# ROS1 集成
 
 ## 简介

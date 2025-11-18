@@ -202,7 +202,7 @@ export default function Home() {
           </Link>
 
           {/* Nav Card 5 */}
-          <Link href="/docs/applications/control">
+          <Link href="/docs/applications">
             <div className="group p-6 rounded-xl bg-card/30 border border-border/40 hover:border-primary/50 transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] cursor-pointer h-full">
               <div className="space-y-3">
                 <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">

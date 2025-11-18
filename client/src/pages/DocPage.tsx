@@ -1,4 +1,4 @@
-import { useRoute } from "wouter";
+import { useRoute, useLocation } from "wouter";
 import { Streamdown } from "streamdown";
 import DocLayout from "@/components/DocLayout";
 import { findDocByPath } from "@/lib/docs";
@@ -7,8 +7,8 @@ import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 
 export default function DocPage() {
-  const [, params] = useRoute("/docs/*");
-  const path = `/docs/${params || ""}`.replace(/\/$/, "") || "/docs";
+  const [location] = useLocation();
+  const path = location;
   
   const doc = findDocByPath(path);
 
@@ -20,6 +20,7 @@ export default function DocPage() {
           <p className="text-muted-foreground mb-6">
             抱歉，您访问的文档页面不存在。
           </p>
+
           <Link href="/docs/about/overview">
             <Button>
               <ArrowLeft className="mr-2 h-4 w-4" />

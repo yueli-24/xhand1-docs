@@ -113,3 +113,9 @@
 - [x] 修复一级tab点击后显示"页面未找到"的问题
 - [x] 为所有一级tab添加content内容
 - [x] 测试所有一级tab的访问
+
+## 二级页面路由问题
+
+- [x] 诊断二级页面路由问题（如/docs/applications/grasping显示"页面未找到"）
+- [x] 修复findDocByPath函数或路由逻辑 - 改用useLocation()直接获取完整路径
+- [x] 测试所有二级页面访问
