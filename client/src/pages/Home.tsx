@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { BookOpen, Code, Rocket, HelpCircle, Download, Zap, Gamepad2, ChevronRight } from "lucide-react";
+import { BookOpen, Code, Rocket, HelpCircle, Download, Zap, Gamepad2, ChevronRight, Lightbulb, LifeBuoy } from "lucide-react";
 import { APP_LOGO, APP_TITLE } from "@/const";
 
 export default function Home() {
@@ -19,11 +19,8 @@ export default function Home() {
           </div>
           <nav className="flex items-center gap-6">
             <Link href="/docs/about/overview">
-              <Button variant="ghost" className="text-muted-foreground hover:text-foreground">文档</Button>
-            </Link>
-            <Link href="/docs/quickstart/unboxing">
               <Button className="bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                快速开始
+                文档中心
                 <ChevronRight className="ml-1 h-4 w-4" />
               </Button>
             </Link>
@@ -151,7 +148,7 @@ export default function Home() {
             快速导航
           </span>
         </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {/* Nav Card 1 */}
           <Link href="/docs/about/overview">
             <div className="group p-6 rounded-xl bg-card/30 border border-border/40 hover:border-primary/50 transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] cursor-pointer h-full">
@@ -205,14 +202,40 @@ export default function Home() {
           </Link>
 
           {/* Nav Card 5 */}
-          <Link href="/docs/faq">
+          <Link href="/docs/applications/control">
             <div className="group p-6 rounded-xl bg-card/30 border border-border/40 hover:border-primary/50 transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] cursor-pointer h-full">
               <div className="space-y-3">
                 <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <HelpCircle className="h-5 w-5 text-primary" />
+                  <Lightbulb className="h-5 w-5 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">常见问题</h3>
-                <p className="text-sm text-muted-foreground">FAQ、故障排查、技术支持中心</p>
+                <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">应用实践</h3>
+                <p className="text-sm text-muted-foreground">控制模式、灵巧抓取、触觉感知应用</p>
+              </div>
+            </div>
+          </Link>
+
+          {/* Nav Card 6 */}
+          <Link href="/docs/faq">
+            <div className="group p-6 rounded-xl bg-card/30 border border-border/40 hover:border-accent/50 transition-all hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] cursor-pointer h-full">
+              <div className="space-y-3">
+                <div className="h-10 w-10 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                  <HelpCircle className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">常见问题</h3>
+                <p className="text-sm text-muted-foreground">FAQ、故障排查、问题解决方案</p>
+              </div>
+            </div>
+          </Link>
+
+          {/* Nav Card 7 */}
+          <Link href="/docs/support/troubleshooting">
+            <div className="group p-6 rounded-xl bg-card/30 border border-border/40 hover:border-primary/50 transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] cursor-pointer h-full">
+              <div className="space-y-3">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <LifeBuoy className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">支持与资源</h3>
+                <p className="text-sm text-muted-foreground">技术支持、下载中心、术语词汇表</p>
               </div>
             </div>
           </Link>
