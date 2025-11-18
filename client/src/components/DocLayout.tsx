@@ -19,10 +19,10 @@ function NavItem({ section, level = 0 }: { section: DocSection; level?: number }
   return (
     <div className="mb-1">
       <div
-        className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer transition-colors ${
+        className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm cursor-pointer transition-all ${
           isActive
-            ? "bg-primary text-primary-foreground font-medium"
-            : "hover:bg-accent hover:text-accent-foreground"
+            ? "bg-primary/20 text-primary font-medium border-l-2 border-primary shadow-[0_0_10px_rgba(59,130,246,0.2)]"
+            : "hover:bg-accent/10 hover:text-accent-foreground hover:border-l-2 hover:border-accent/50"
         }`}
         style={{ paddingLeft: `${level * 12 + 12}px` }}
       >
@@ -65,7 +65,7 @@ export default function DocLayout({ children }: DocLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl shadow-[0_1px_20px_rgba(0,0,0,0.3)]">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-4">
             <Button
@@ -76,9 +76,10 @@ export default function DocLayout({ children }: DocLayoutProps) {
             >
               {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
-            <Link href="/" className="flex items-center gap-2">
-              <img src={APP_LOGO} alt={APP_TITLE} className="h-8" />
-              <span className="font-bold text-lg">{APP_TITLE}</span>
+            <Link href="/" className="flex items-center gap-3">
+              <img src={APP_LOGO} alt={APP_TITLE} className="h-10" />
+              <div className="h-8 w-px bg-border/60" />
+              <span className="font-semibold text-lg tracking-tight">{APP_TITLE}</span>
             </Link>
           </div>
           
@@ -88,7 +89,7 @@ export default function DocLayout({ children }: DocLayoutProps) {
               <Input
                 type="search"
                 placeholder="搜索文档..."
-                className="pl-8 w-64"
+                className="pl-8 w-64 bg-muted/50 border-border/60 focus:border-primary/50 focus:ring-1 focus:ring-primary/20"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -100,7 +101,7 @@ export default function DocLayout({ children }: DocLayoutProps) {
       <div className="flex-1 flex">
         {/* Sidebar */}
         <aside
-          className={`fixed lg:sticky top-16 left-0 z-40 h-[calc(100vh-4rem)] w-64 border-r bg-background transition-transform lg:translate-x-0 ${
+          className={`fixed lg:sticky top-16 left-0 z-40 h-[calc(100vh-4rem)] w-64 border-r border-border/40 bg-background/50 backdrop-blur-xl transition-transform lg:translate-x-0 ${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
