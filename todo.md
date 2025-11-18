@@ -78,4 +78,4 @@
 
 - [x] 更新版权信息为"北京星动纪元科技有限公司 版权所有京ICP备2023021939号"
 - [x] 更新支持邮箱为support@robotera.com
-- [x] 更新Logo为robotera官方Logo
+- [x] 更新Logo为robotera官方Logo (logo1.svg)
