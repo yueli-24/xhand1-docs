@@ -206,3 +206,18 @@
 - [x] 检查Home组件和相关组件
 - [x] 修复所有需要认证的API调用
 - [x] 测试未登录用户访问首页
+
+## 重要提醒
+
+⚠️ **每次保存检查点后，必须推送到GitHub仓库：**
+```bash
+cd /home/ubuntu/xhand1_docs && git push github main
+```
+
+## 修夏admin编辑页面DOM嵌套错误
+
+- [x] 分析<p>标签内嵌套<div>的错误原因
+- [x] 检查AdminEditDoc预览模式的HTML结构
+- [x] 修复Streamdown渲染的容器结构
+- [x] 测试预览模式是否正常
+- [ ] 推送到GitHub

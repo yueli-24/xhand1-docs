@@ -261,9 +261,9 @@ export function AIChatBox({
                       )}
                     >
                       {message.role === "assistant" ? (
-                        <div className="prose prose-sm dark:prose-invert max-w-none">
+                        <article className="prose prose-sm prose-slate dark:prose-invert max-w-none">
                           <Streamdown>{message.content}</Streamdown>
-                        </div>
+                        </article>
                       ) : (
                         <p className="whitespace-pre-wrap text-sm">
                           {message.content}

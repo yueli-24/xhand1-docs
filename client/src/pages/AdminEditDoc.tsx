@@ -42,35 +42,13 @@ export default function AdminEditDoc() {
     },
   });
 
+  // All useEffect hooks must be at the top level, before any conditional returns
   useEffect(() => {
     if (!sessionLoading && !adminSession) {
       // Redirect to home if not admin
       setLocation("/");
     }
   }, [adminSession, sessionLoading, setLocation]);
-
-  // Show loading while checking session
-  if (sessionLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">验证权限中...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // If no admin session, show redirect message
-  if (!adminSession) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <p className="text-muted-foreground">正在跳转...</p>
-        </div>
-      </div>
-    );
-  }
 
   useEffect(() => {
     if (savedDoc) {
@@ -94,6 +72,29 @@ export default function AdminEditDoc() {
       }
     }
   }, [savedDoc, docId]);
+
+  // Show loading while checking session
+  if (sessionLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">验证权限中...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If no admin session, show redirect message
+  if (!adminSession) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <p className="text-muted-foreground">正在跳转...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (sessionLoading || docLoading) {
     return (
@@ -228,9 +229,9 @@ export default function AdminEditDoc() {
               <CardDescription>Markdown渲染预览</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="prose prose-invert max-w-none">
+              <article className="prose prose-slate dark:prose-invert max-w-none">
                 <Streamdown>{content}</Streamdown>
-              </div>
+              </article>
             </CardContent>
           </Card>
         ) : (
