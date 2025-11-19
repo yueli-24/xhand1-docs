@@ -25,7 +25,12 @@ export default function AdminEditDoc() {
   });
   const { data: savedDoc, isLoading: docLoading } = trpc.admin.getDoc.useQuery(
     { docId },
-    { enabled: !!docId }
+    { 
+      enabled: !!docId && !!adminSession,
+      retry: false,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    }
   );
   
   const updateMutation = trpc.admin.updateDoc.useMutation({

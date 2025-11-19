@@ -17,6 +17,9 @@ export default function AdminDashboard() {
   });
   const { data: savedDocs } = trpc.admin.listDocs.useQuery(undefined, {
     enabled: !!adminSession, // Only fetch when admin session exists
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
   const utils = trpc.useUtils();
   
