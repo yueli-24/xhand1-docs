@@ -13,7 +13,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
         <div className="container flex h-20 items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src={APP_LOGO} alt={APP_TITLE} className="h-10" />
+            <img src={APP_LOGO} alt={APP_TITLE} className="h-10" style={{width: '150px'}} />
             <div className="h-8 w-px bg-border/60" />
             <span className="font-semibold text-lg tracking-tight">{APP_TITLE}</span>
           </div>
@@ -34,7 +34,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-medium">
             <Zap className="h-4 w-4" />
-            <span>全直驱 · 高精度 · 强反馈</span>
+            <span>高自由度 · 高灵巧度 · 高感知</span>
           </div>
           
           {/* Title */}
@@ -52,7 +52,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-6 text-lg md:text-xl text-muted-foreground">
             <div className="flex items-center gap-2">
               <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              <span>12自由度</span>
+              <span>12个独立自由度</span>
             </div>
             <div className="h-4 w-px bg-border" />
             <div className="flex items-center gap-2">
@@ -62,13 +62,13 @@ export default function Home() {
             <div className="h-4 w-px bg-border" />
             <div className="flex items-center gap-2">
               <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              <span>支持反驱</span>
+              <span>支持反驱，可靠性高</span>
             </div>
           </div>
           
           {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            星动纪元推出的高仿生灵巧手，为人形机器人和工业自动化提供精密操作能力
+            专为 强化学习、模仿学习、控制研究 打造的旗舰级机器人灵巧手。
           </p>
           
           {/* CTA Buttons */}
@@ -82,7 +82,7 @@ export default function Home() {
             <Link href="/docs/about/overview">
               <Button size="lg" variant="outline" className="w-full sm:w-auto border-border/60 hover:border-primary/50 hover:bg-primary/5">
                 <BookOpen className="mr-2 h-5 w-5" />
-                查看文档
+                查看文档中心
               </Button>
             </Link>
           </div>
@@ -106,7 +106,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-semibold">全驱设计</h3>
               <p className="text-muted-foreground leading-relaxed">
-                12个主动自由度，每个关节独立驱动，实现精确控制和复杂动作
+                12 个主动自由度，全关节独立驱动。每个关节由独立执行机构精准控制，支持拇指与四指的灵活对指及高精度操作。
               </p>
             </div>
           </div>
@@ -118,9 +118,9 @@ export default function Home() {
               <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
                 <BookOpen className="h-6 w-6 text-accent" />
               </div>
-              <h3 className="text-xl font-semibold">高分辨率触觉感知</h3>
+              <h3 className="text-xl font-semibold">高密度触觉阵列</h3>
               <p className="text-muted-foreground leading-relaxed">
-                16个触觉传感器，270度环形式覆盖，提供实时触觉反馈
+                每指 120 点高分辨率传感点，270° 环绕覆盖，支持 三维力感知（含切向 XY） 与 温度检测，实现类人级触摸与接触理解。
               </p>
             </div>
           </div>
@@ -132,9 +132,9 @@ export default function Home() {
               <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Code className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold">强大抓握力</h3>
+              <h3 className="text-xl font-semibold">高保真遥操作</h3>
               <p className="text-muted-foreground leading-relaxed">
-                最大抓握力80N，额定负载1.5kg，满足各种操作任务需求
+                仿人手设计，搭配自研 Apple Vision Pro / Meta Quest / Manus 手套遥操作软件，实现自然的人手 → 机器人手映射，轻松采集高质量示教数据。
               </p>
             </div>
           </div>
@@ -195,7 +195,7 @@ export default function Home() {
                 <div className="h-10 w-10 rounded-lg bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                   <Gamepad2 className="h-5 w-5 text-accent" />
                 </div>
-                <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">遥操作</h3>
+                <h3 className="text-lg font-semibold group-hover:text-accent transition-colors">数据采集</h3>
                 <p className="text-sm text-muted-foreground">VR头显、动捕手套、外骨骼手套多种方案</p>
               </div>
             </div>
