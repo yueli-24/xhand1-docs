@@ -18,7 +18,11 @@ export default function AdminEditDoc() {
   const [showPreview, setShowPreview] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
-  const { data: adminSession, isLoading: sessionLoading } = trpc.admin.me.useQuery();
+  const { data: adminSession, isLoading: sessionLoading } = trpc.admin.me.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
   const { data: savedDoc, isLoading: docLoading } = trpc.admin.getDoc.useQuery(
     { docId },
     { enabled: !!docId }
@@ -39,6 +43,29 @@ export default function AdminEditDoc() {
       setLocation("/");
     }
   }, [adminSession, sessionLoading, setLocation]);
+
+  // Show loading while checking session
+  if (sessionLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">验证权限中...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If no admin session, show redirect message
+  if (!adminSession) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <p className="text-muted-foreground">正在跳转...</p>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     if (savedDoc) {

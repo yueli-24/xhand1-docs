@@ -10,7 +10,11 @@ import { docsData } from "@/lib/docs";
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
   
-  const { data: adminSession, isLoading: sessionLoading } = trpc.admin.me.useQuery();
+  const { data: adminSession, isLoading: sessionLoading } = trpc.admin.me.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
   const { data: savedDocs } = trpc.admin.listDocs.useQuery(undefined, {
     enabled: !!adminSession, // Only fetch when admin session exists
   });
@@ -33,19 +37,27 @@ export default function AdminDashboard() {
     }
   }, [adminSession, sessionLoading, setLocation]);
 
+  // Show loading state while checking session
   if (sessionLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">加载中...</p>
+          <p className="text-muted-foreground">验证权限中...</p>
         </div>
       </div>
     );
   }
 
+  // If session check is complete and no admin session, don't render (useEffect will redirect)
   if (!adminSession) {
-    return null;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <p className="text-muted-foreground">正在跳转...</p>
+        </div>
+      </div>
+    );
   }
 
   // Flatten all documents from docsData
