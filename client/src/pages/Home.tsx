@@ -1,13 +1,22 @@
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { BookOpen, Code, Rocket, HelpCircle, Download, Zap, Gamepad2, ChevronRight, Lightbulb, LifeBuoy } from "lucide-react";
 import { APP_LOGO, APP_TITLE, getLoginUrl } from "@/const";
+import { useEffect } from "react";
 
 export default function Home() {
   // The userAuth hooks provides authentication state
   // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
   let { user, loading, error, isAuthenticated, logout } = useAuth();
+  const [, setLocation] = useLocation();
+
+  // Auto-redirect admin users to dashboard
+  useEffect(() => {
+    if (!loading && user && user.role === 'admin') {
+      setLocation('/admin/dashboard');
+    }
+  }, [user, loading, setLocation]);
 
   return (
     <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">

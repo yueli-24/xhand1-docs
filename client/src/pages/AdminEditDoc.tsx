@@ -35,7 +35,8 @@ export default function AdminEditDoc() {
 
   useEffect(() => {
     if (!sessionLoading && !adminSession) {
-      setLocation("/admin");
+      // Redirect to home if not admin
+      setLocation("/");
     }
   }, [adminSession, sessionLoading, setLocation]);
 

@@ -155,7 +155,16 @@
 
 ## 修复React key重复错误
 
-- [ ] 查找docs.ts中所有使用"overview" ID的文档
-- [ ] 修复重复的ID为唯一值（如"about-overview", "quickstart-overview"等）
-- [ ] 更新所有相关的路径引用
-- [ ] 测试修复后的页面是否正常工作
+- [x] 查找docs.ts中所有使用"overview" ID的文档
+- [x] 修复重复的ID为唯一值（如"about-overview", "quickstart-overview"等）
+- [x] 更新所有相关的路径引用
+- [x] 测试修复后的页面是否正常工作
+
+## 修复发布后登录和退出登录问题
+
+- [x] 检查OAuth登录后的跳转逻辑
+- [x] 分析为什么登录后没有跳转到Dashboard
+- [x] 修复登录成功后的重定向逻辑
+- [x] 检查退出登录功能
+- [x] 修复退出登录后的状态更新
+- [x] 测试完整的登录和退出流程

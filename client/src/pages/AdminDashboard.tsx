@@ -12,17 +12,22 @@ export default function AdminDashboard() {
   
   const { data: adminSession, isLoading: sessionLoading } = trpc.admin.me.useQuery();
   const { data: savedDocs } = trpc.admin.listDocs.useQuery();
+  const utils = trpc.useUtils();
   
-  const logoutMutation = trpc.admin.logout.useMutation({
+  const logoutMutation = trpc.auth.logout.useMutation({
     onSuccess: () => {
+      // Clear auth cache
+      utils.auth.me.setData(undefined, null);
       toast.success("已退出登录");
-      setLocation("/admin");
+      // Redirect to home page
+      setLocation("/");
     },
   });
 
   useEffect(() => {
     if (!sessionLoading && !adminSession) {
-      setLocation("/admin");
+      // Redirect to home if not admin
+      setLocation("/");
     }
   }, [adminSession, sessionLoading, setLocation]);
 
@@ -71,7 +76,7 @@ export default function AdminDashboard() {
             <FileText className="h-6 w-6 text-primary" />
             <div>
               <h1 className="text-lg font-semibold">文档管理系统</h1>
-              <p className="text-sm text-muted-foreground">管理员: {adminSession.username}</p>
+              <p className="text-sm text-muted-foreground">管理员: {adminSession.username || 'Admin'}</p>
             </div>
           </div>
           <Button
