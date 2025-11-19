@@ -10,6 +10,25 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
 
+  // Set Content Security Policy headers
+  app.use((_req, res, next) => {
+    res.setHeader(
+      "Content-Security-Policy",
+      [
+        "default-src 'self'",
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://umami.manus.im",
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+        "font-src 'self' https://fonts.gstatic.com",
+        "img-src 'self' data: https:",
+        "connect-src 'self' https://umami.manus.im",
+        "frame-src 'none'",
+        "object-src 'none'",
+        "base-uri 'self'",
+      ].join("; ")
+    );
+    next();
+  });
+
   // Serve static files from dist/public in production
   const staticPath =
     process.env.NODE_ENV === "production"
