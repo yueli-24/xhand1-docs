@@ -23,7 +23,7 @@ export const docsData: DocSection[] = [
 - **产品对比**：与其他灵巧手产品的对比分析`,
     children: [
       {
-        id: "overview",
+        id: "about-overview",
         title: "产品概述",
         path: "/docs/about/overview",
         content: `# 产品概述
@@ -607,7 +607,7 @@ A:
 - **ROS2 集成**：在 ROS2 环境中使用 XHAND1`,
   children: [
     {
-      id: "overview",
+      id: "sdk-overview",
       title: "SDK 架构概述",
       path: "/docs/sdk/overview",
       content: `# SDK 架构概述
@@ -1399,7 +1399,7 @@ executor.spin()
 - **DexUMI**：了解 DexUMI 数据采集系统`,
   children: [
     {
-      id: "overview",
+      id: "data-collection-overview",
       title: "数据采集概述",
       path: "/docs/data-collection/overview",
       content: `# 数据采集概述

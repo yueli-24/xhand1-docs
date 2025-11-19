@@ -152,3 +152,10 @@
 - [x] 移除独立的管理员登录系统，使用OAuth登录
 - [x] 测试OAuth用户访问管理员功能
 - [x] 更新ADMIN_GUIDE.md文档说明新的认证方式
+
+## 修复React key重复错误
+
+- [ ] 查找docs.ts中所有使用"overview" ID的文档
+- [ ] 修复重复的ID为唯一值（如"about-overview", "quickstart-overview"等）
+- [ ] 更新所有相关的路径引用
+- [ ] 测试修复后的页面是否正常工作
