@@ -7,6 +7,7 @@ import { admins, docContents } from "../drizzle/schema";
 import { getDb } from "./db";
 import { eq } from "drizzle-orm";
 import * as crypto from "crypto";
+import { storagePut } from "./storage";
 
 // Simple password hashing
 function hashPassword(password: string): string {
@@ -190,6 +191,36 @@ export const appRouter = router({
         }
         
         return { success: true };
+      }),
+    
+    // Upload file (image or attachment)
+    uploadFile: publicProcedure
+      .input(z.object({
+        fileName: z.string(),
+        fileData: z.string(), // base64 encoded
+        fileType: z.string(), // MIME type
+      }))
+      .mutation(async ({ input, ctx }) => {
+        // Check OAuth user role
+        if (!ctx.user || ctx.user.role !== 'admin') throw new Error("未授权");
+        
+        // Decode base64
+        const buffer = Buffer.from(input.fileData, 'base64');
+        
+        // Generate unique filename
+        const ext = input.fileName.split('.').pop() || 'bin';
+        const timestamp = Date.now();
+        const randomStr = crypto.randomBytes(8).toString('hex');
+        const key = `docs/${timestamp}-${randomStr}.${ext}`;
+        
+        // Upload to S3
+        const { url } = await storagePut(key, buffer, input.fileType);
+        
+        return {
+          success: true,
+          url,
+          fileName: input.fileName,
+        };
       }),
   }),
 });

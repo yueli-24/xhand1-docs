@@ -220,4 +220,29 @@ cd /home/ubuntu/xhand1_docs && git push github main
 - [x] 检查AdminEditDoc预览模式的HTML结构
 - [x] 修复Streamdown渲染的容器结构
 - [x] 测试预览模式是否正常
+- [x] 推送到GitHub
+
+## 修夏tactile页面DOM嵌套错误
+
+- [x] 分析tactile文档内容导致的DOM嵌套错误
+- [x] 检查是否是shadcn/ui组件的问题
+- [x] 修复错误（已在之前的修复中解决）
+- [x] 测试
+- [x] 无需推送（已包含在之前的commit中）
+
+## 修复生产环境admin闪退问题
+
+- [x] 诊断生产环境admin页面闪退原因
+- [x] 检查是否是CSP或其他生产环境特有问题
+- [x] 修复闪退问题（已包含在commit 67dd1b9中）
+- [ ] 提醒用户重新发布网站
+
+## 实现图片和附件拖拽上传功能
+
+- [x] 设计文件上传API（支持图片和附件）
+- [x] 实现图片拖拽上传到编辑器
+- [x] 自动生成Markdown图片语法
+- [x] 实现附件拖拽上传
+- [x] 在文档页面显示附件下载链接（Markdown自动渲染）
+- [x] 测试上传功能
 - [ ] 推送到GitHub

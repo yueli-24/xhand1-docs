@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { trpc } from "@/lib/trpc";
 import { useLocation, useRoute } from "wouter";
 import { toast } from "sonner";
-import { ArrowLeft, Save, Upload, Eye } from "lucide-react";
+import { ArrowLeft, Save, Upload, Eye, Image, Paperclip } from "lucide-react";
 import { docsData } from "@/lib/docs";
 import { Streamdown } from "streamdown";
 
@@ -16,7 +16,9 @@ export default function AdminEditDoc() {
   
   const [content, setContent] = useState("");
   const [showPreview, setShowPreview] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   
   const { data: adminSession, isLoading: sessionLoading } = trpc.admin.me.useQuery(undefined, {
     retry: false,
@@ -39,6 +41,36 @@ export default function AdminEditDoc() {
     },
     onError: (error: any) => {
       toast.error(error.message || "保存失败");
+    },
+  });
+  
+  const uploadFileMutation = trpc.admin.uploadFile.useMutation({
+    onSuccess: (data) => {
+      // Insert markdown syntax at cursor position
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+      
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const isImage = data.fileName.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i);
+      const markdown = isImage 
+        ? `![${data.fileName}](${data.url})`
+        : `[${data.fileName}](${data.url})`;
+      
+      const newContent = content.substring(0, start) + markdown + content.substring(end);
+      setContent(newContent);
+      
+      // Move cursor after inserted text
+      setTimeout(() => {
+        textarea.focus();
+        const newPos = start + markdown.length;
+        textarea.setSelectionRange(newPos, newPos);
+      }, 0);
+      
+      toast.success(`${isImage ? '图片' : '附件'}上传成功`);
+    },
+    onError: (error: any) => {
+      toast.error(error.message || "上传失败");
     },
   });
 
@@ -162,6 +194,59 @@ export default function AdminEditDoc() {
     };
     reader.readAsText(file);
   };
+  
+  // Handle image/attachment upload
+  const handleImageUpload = async (file: File) => {
+    // Check file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("文件大小不能超过10MB");
+      return;
+    }
+    
+    // Read file as base64
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const base64 = e.target?.result as string;
+      const base64Data = base64.split(',')[1]; // Remove data:image/...;base64, prefix
+      
+      uploadFileMutation.mutate({
+        fileName: file.name,
+        fileData: base64Data,
+        fileType: file.type,
+      });
+    };
+    reader.onerror = () => {
+      toast.error("文件读取失败");
+    };
+    reader.readAsDataURL(file);
+  };
+  
+  // Drag and drop handlers
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+  
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+  
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    if (files.length === 0) return;
+    
+    // Upload each file
+    files.forEach(file => {
+      handleImageUpload(file);
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -243,14 +328,35 @@ export default function AdminEditDoc() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Textarea
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                className="min-h-[600px] font-mono text-sm"
-                placeholder="在此输入Markdown内容..."
-              />
-              <div className="mt-4 text-sm text-muted-foreground">
-                字符数: {content.length}
+              <div 
+                className="relative"
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+              >
+                {isDragging && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center bg-primary/10 border-2 border-dashed border-primary rounded-lg">
+                    <div className="text-center">
+                      <Image className="mx-auto h-12 w-12 text-primary mb-2" />
+                      <p className="text-lg font-medium text-primary">拖放图片或附件到这里</p>
+                      <p className="text-sm text-muted-foreground mt-1">支持 JPG, PNG, GIF, PDF 等格式</p>
+                    </div>
+                  </div>
+                )}
+                <Textarea
+                  ref={textareaRef}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  placeholder="输入Markdown内容...或拖放图片/附件到这里"
+                  className="min-h-[600px] font-mono"
+                />
+              </div>
+              <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
+                <span>字符数: {content.length}</span>
+                <span className="flex items-center gap-2">
+                  <Image className="h-4 w-4" />
+                  <span>支持拖放图片和附件</span>
+                </span>
               </div>
             </CardContent>
           </Card>
