@@ -5,12 +5,22 @@ import { findDocByPath } from "@/lib/docs";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
+import { trpc } from "@/lib/trpc";
 
 export default function DocPage() {
   const [location] = useLocation();
   const path = location;
   
   const doc = findDocByPath(path);
+  
+  // Try to load custom content from database
+  const { data: savedDoc } = trpc.admin.getDoc.useQuery(
+    { docId: doc?.id || "" },
+    { enabled: !!doc?.id, retry: false }
+  );
+  
+  // Use saved content if available, otherwise use default
+  const content = savedDoc?.content || doc?.content;
 
   if (!doc) {
     return (
@@ -63,7 +73,7 @@ export default function DocPage() {
   return (
     <DocLayout>
       <article className="prose prose-slate dark:prose-invert max-w-none">
-        <Streamdown>{doc.content || `# ${doc.title}\n\n内容正在完善中...`}</Streamdown>
+        <Streamdown>{content || `# ${doc.title}\n\n内容正在完善中...`}</Streamdown>
       </article>
     </DocLayout>
   );
