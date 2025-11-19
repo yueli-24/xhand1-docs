@@ -93,14 +93,16 @@ export const appRouter = router({
           throw new Error("用户名或密码错误");
         }
         
-        setAdminSession(ctx.res, admin[0].id, admin[0].username);
+        const token = setAdminSession(ctx.res, admin[0].id, admin[0].username);
+        console.log('[Admin Login] Session created:', { adminId: admin[0].id, username: admin[0].username, token });
         
-        return { success: true };
+        return { success: true, adminId: admin[0].id, username: admin[0].username };
       }),
     
     // Check admin session
     me: publicProcedure.query(({ ctx }) => {
       const session = getAdminSession(ctx.req);
+      console.log('[Admin Me] Session check:', { session, cookies: ctx.req.cookies });
       return session;
     }),
     

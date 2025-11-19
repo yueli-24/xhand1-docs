@@ -25,7 +25,18 @@ export default function AdminLogin() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    loginMutation.mutate({ username, password });
+    console.log('[AdminLogin] Submitting login:', { username, password: '***' });
+    loginMutation.mutate(
+      { username, password },
+      {
+        onSuccess: (data) => {
+          console.log('[AdminLogin] Login success:', data);
+        },
+        onError: (error) => {
+          console.log('[AdminLogin] Login error:', error);
+        },
+      }
+    );
   };
 
   return (

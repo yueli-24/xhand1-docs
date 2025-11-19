@@ -6,7 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import DocPage from "./pages/DocPage";
-import AdminLogin from "./pages/AdminLogin";
+import AdminLoginSimple from "./pages/AdminLoginSimple";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminEditDoc from "./pages/AdminEditDoc";
 
@@ -16,7 +16,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path="/docs/*" component={DocPage} />
-      <Route path="/admin" component={AdminLogin} />
+      <Route path="/admin" component={AdminLoginSimple} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/edit/:docId" component={AdminEditDoc} />
       <Route path={"/404"} component={NotFound} />
