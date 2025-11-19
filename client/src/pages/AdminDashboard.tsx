@@ -11,7 +11,9 @@ export default function AdminDashboard() {
   const [, setLocation] = useLocation();
   
   const { data: adminSession, isLoading: sessionLoading } = trpc.admin.me.useQuery();
-  const { data: savedDocs } = trpc.admin.listDocs.useQuery();
+  const { data: savedDocs } = trpc.admin.listDocs.useQuery(undefined, {
+    enabled: !!adminSession, // Only fetch when admin session exists
+  });
   const utils = trpc.useUtils();
   
   const logoutMutation = trpc.auth.logout.useMutation({
