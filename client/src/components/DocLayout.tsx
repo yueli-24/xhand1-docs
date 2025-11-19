@@ -77,7 +77,7 @@ export default function DocLayout({ children }: DocLayoutProps) {
               {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
             <Link href="/" className="flex items-center gap-3">
-              <img src={APP_LOGO} alt={APP_TITLE} className="h-10" />
+              <img src={APP_LOGO} alt={APP_TITLE} className="h-10" style={{width: '150px'}} />
               <div className="h-8 w-px bg-border/60" />
               <span className="font-semibold text-lg tracking-tight">{APP_TITLE}</span>
             </Link>

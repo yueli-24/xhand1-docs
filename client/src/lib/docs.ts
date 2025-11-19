@@ -694,9 +694,9 @@ XHAND1 C++ SDK 提供了高性能的 C++ 接口，适合实时控制和高频响
 请参考 SDK 架构概述中的编译指南，或访问下载中心获取最新版本。`
     },
     {
-      id: "ros1",
+      id: "ros",
       title: "ROS1 集成",
-      path: "/docs/sdk/ros1",
+      path: "/docs/sdk/ros",
       content: `# ROS1 集成
 
 ## 简介
@@ -1383,25 +1383,26 @@ executor.spin()
   ]
 },
   {
-  id: "teleoperation",
-  title: "遥操作",
-  path: "/docs/teleoperation",
-  content: `# 遥操作
+  id: "data-collection",
+  title: "数据采集",
+  path: "/docs/data-collection",
+  content: `# 数据采集
 
-本章节介绍 XHAND1 的遥操作方案，支持 VR 头显、动捕手套、外骨骼手套等多种遥操作方式。提供自研高精度遥操作软件，实现人手与 XHAND 系列灵巧手的 Retargeting（动作重定向）功能，使客户能够快速完成远程操作测试和高质量数据采集。
+本章节介绍 XHAND1 的数据采集方案，支持 VR 头显、动捕手套、外骨骼手套等多种遥操作方式。提供自研高精度遥操作软件，实现人手与 XHAND 系列灵巧手的 Retargeting（动作重定向）功能，使客户能够快速完成远程操作测试和高质量数据采集。
 
 ## 章节导航
 
-- **遥操作概述**：了解遥操作系统的整体架构和 Retargeting 技术
+- **数据采集概述**：了解数据采集系统的整体架构和 Retargeting 技术
 - **Meta Quest 遥操作**：使用 Meta Quest VR 头显进行遥操作
 - **Apple Vision Pro 遥操作**：使用 Apple Vision Pro 进行遥操作
-- **MANUS 手套遥操作**：使用 MANUS 动捕手套进行高精度遥操作`,
+- **MANUS 手套遥操作**：使用 MANUS 动捕手套进行高精度遥操作
+- **DexUMI**：了解 DexUMI 数据采集系统`,
   children: [
     {
       id: "overview",
-      title: "遥操作概述",
-      path: "/docs/teleoperation/overview",
-      content: `# 遥操作概述
+      title: "数据采集概述",
+      path: "/docs/data-collection/overview",
+      content: `# 数据采集概述
 
 ## 什么是遥操作
 
@@ -1582,7 +1583,7 @@ XHAND1 支持多种遥操作设备和方案：
     {
       id: "meta-quest",
       title: "Meta Quest 遥操作",
-      path: "/docs/teleoperation/meta-quest",
+      path: "/docs/data-collection/meta-quest",
       content: `# Meta Quest 遥操作
 
 ## 简介
@@ -1910,7 +1911,7 @@ print("数据采集完成！")
     {
       id: "apple-vision-pro",
       title: "Apple Vision Pro 遥操作",
-      path: "/docs/teleoperation/apple-vision-pro",
+      path: "/docs/data-collection/apple-vision-pro",
       content: `# Apple Vision Pro 遥操作
 
 ## 简介
@@ -2266,7 +2267,7 @@ tele.setRetargetingStrategy(customRetargeting)
     {
       id: "manus-glove",
       title: "MANUS手套 遥操作",
-      path: "/docs/teleoperation/manus-glove",
+      path: "/docs/data-collection/manus-glove",
       content: `# MANUS手套 遥操作
 
 ## 简介
@@ -2677,6 +2678,68 @@ A: 请尝试：
 **MANUS技术支持**：
 - 邮箱：support@manus-meta.com
 - 网站：https://www.manus-meta.com/support`
+    },
+    {
+      id: "dexumi",
+      title: "DexUMI",
+      path: "/docs/data-collection/dexumi",
+      content: `# DexUMI
+
+## 简介
+
+DexUMI 是一个高效的数据采集系统，专为 XHAND1 灵巧手设计，用于采集高质量的操作数据。通过 DexUMI，您可以轻松地采集和管理用于机器学习的示教数据。
+
+## 主要特性
+
+- **高效采集**：支持高频率数据采集，确保数据的完整性
+- **多模态支持**：同时采集关节角度、力矩、触觉信息等
+- **数据管理**：内置数据管理工具，方便数据的存储和查看
+- **格式兼容**：支持多种数据格式导出，方便后续处理
+
+## 系统要求
+
+- **操作系统**：Ubuntu 20.04/22.04 或 Windows 10/11
+- **Python 版本**：3.8 或更高
+- **内存**：8GB RAM 或更高
+- **存储空间**：至少 50GB 可用空间
+
+## 数据格式
+
+DexUMI 采集的数据包含以下信息：
+
+- **关节角度**：12个关节的实时角度
+- **关节力矩**：每个关节的力矩输出
+- **触觉数据**：16个触觉传感器的读数
+- **时间戳**：每个数据点的精确时间
+
+## 最佳实践
+
+1. **采样率选择**：根据任务需求选择合适的采样率，一般推荐 100Hz
+2. **数据备份**：定期备份采集的数据，防止数据丢失
+3. **元数据记录**：记录详细的元数据信息，方便后续分析
+4. **数据验证**：采集后及时验证数据的完整性和正确性
+
+## 常见问题
+
+**Q: DexUMI 支持哪些数据格式？**
+
+A: DexUMI 支持多种数据格式，包括 HDF5、CSV、JSON 等。推荐使用 HDF5 格式，因为它支持高效的大数据存储。
+
+**Q: 如何调整采样率？**
+
+A: 在创建 DataCollector 时通过 sample_rate 参数设置，支持的范围为 10Hz 到 1000Hz。
+
+**Q: 数据存储在哪里？**
+
+A: 默认存储在 ~/dexumi_data/ 目录下，可以通过配置文件修改。
+
+## 技术支持
+
+如需帮助，请联系：
+
+- **邮箱**：dexumi-support@robotera.com
+- **文档**：https://docs.robotera.com/dexumi
+- **GitHub**：https://github.com/robotera/dexumi`
     }
   ]
 },
