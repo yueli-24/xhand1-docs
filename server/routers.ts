@@ -70,6 +70,19 @@ export const appRouter = router({
     }),
   }),
 
+  // Public docs routes (read-only)
+  docs: router({
+    getDoc: publicProcedure
+      .input(z.object({ docId: z.string() }))
+      .query(async ({ input }) => {
+        const db = await getDb();
+        if (!db) return null;
+        
+        const doc = await db.select().from(docContents).where(eq(docContents.docId, input.docId)).limit(1);
+        return doc.length > 0 ? doc[0] : null;
+      }),
+  }),
+
   // Admin routes for document management
   admin: router({
     // Admin login

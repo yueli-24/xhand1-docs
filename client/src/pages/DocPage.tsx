@@ -14,7 +14,7 @@ export default function DocPage() {
   const doc = findDocByPath(path);
   
   // Try to load custom content from database
-  const { data: savedDoc } = trpc.admin.getDoc.useQuery(
+  const { data: savedDoc } = trpc.docs.getDoc.useQuery(
     { docId: doc?.id || "" },
     { enabled: !!doc?.id, retry: false }
   );
