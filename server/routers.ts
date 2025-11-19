@@ -99,11 +99,16 @@ export const appRouter = router({
         return { success: true, adminId: admin[0].id, username: admin[0].username };
       }),
     
-    // Check admin session
+    // Check admin session - use OAuth user
     me: publicProcedure.query(({ ctx }) => {
-      const session = getAdminSession(ctx.req);
-      console.log('[Admin Me] Session check:', { session, cookies: ctx.req.cookies });
-      return session;
+      // Check if user is logged in via OAuth and has admin role
+      if (ctx.user && ctx.user.role === 'admin') {
+        return {
+          id: ctx.user.id,
+          username: ctx.user.name || ctx.user.email,
+        };
+      }
+      return null;
     }),
     
     // Admin logout
@@ -114,8 +119,8 @@ export const appRouter = router({
     
     // Get all documents
     listDocs: publicProcedure.query(async ({ ctx }) => {
-      const session = getAdminSession(ctx.req);
-      if (!session) throw new Error("未授权");
+      // Check OAuth user role
+      if (!ctx.user || ctx.user.role !== 'admin') throw new Error("未授权");
       
       const db = await getDb();
       if (!db) throw new Error("Database not available");
@@ -128,8 +133,8 @@ export const appRouter = router({
     getDoc: publicProcedure
       .input(z.object({ docId: z.string() }))
       .query(async ({ input, ctx }) => {
-        const session = getAdminSession(ctx.req);
-        if (!session) throw new Error("未授权");
+        // Check OAuth user role
+        if (!ctx.user || ctx.user.role !== 'admin') throw new Error("未授权");
         
         const db = await getDb();
         if (!db) throw new Error("Database not available");
@@ -145,8 +150,8 @@ export const appRouter = router({
         content: z.string(),
       }))
       .mutation(async ({ input, ctx }) => {
-        const session = getAdminSession(ctx.req);
-        if (!session) throw new Error("未授权");
+        // Check OAuth user role
+        if (!ctx.user || ctx.user.role !== 'admin') throw new Error("未授权");
         
         const db = await getDb();
         if (!db) throw new Error("Database not available");
@@ -159,7 +164,7 @@ export const appRouter = router({
           await db.update(docContents)
             .set({
               content: input.content,
-              updatedBy: session.adminId,
+              updatedBy: ctx.user.id,
             })
             .where(eq(docContents.docId, input.docId));
         } else {
@@ -167,7 +172,7 @@ export const appRouter = router({
           await db.insert(docContents).values({
             docId: input.docId,
             content: input.content,
-            updatedBy: session.adminId,
+            updatedBy: ctx.user.id,
           });
         }
         
