@@ -271,4 +271,4 @@ cd /home/ubuntu/xhand1_docs && git push github main
 - [x] 诊断admin页面自动退回home的原因 - OAuth session恢复需要时间
 - [x] 修复认证逻辑和重定向问题 - 改用useAuth并添加500ms延迟检查
 - [x] 测试admin登录流程 - admin dashboard可正常访问
-- [ ] 推送到GitHub
+- [x] 推送到GitHub
