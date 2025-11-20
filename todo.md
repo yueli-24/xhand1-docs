@@ -264,3 +264,11 @@ cd /home/ubuntu/xhand1_docs && git push github main
 - [ ] 修复或提供替代方案
 - [ ] 测试修复效果
 - [ ] 推送到GitHub
+
+## 修夏admin页面登录问题（沙盒重置后）
+
+- [x] 检查开发服务器状态和admin认证逻辑
+- [x] 诊断admin页面自动退回home的原因 - OAuth session恢复需要时间
+- [x] 修复认证逻辑和重定向问题 - 改用useAuth并添加500ms延迟检查
+- [x] 测试admin登录流程 - admin dashboard可正常访问
+- [ ] 推送到GitHub

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { ArrowLeft, Save, Upload, Eye, Image, Paperclip } from "lucide-react";
 import { docsData } from "@/lib/docs";
 import { Streamdown } from "streamdown";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function AdminEditDoc() {
   const [, params] = useRoute("/admin/edit/:docId");
@@ -17,18 +18,14 @@ export default function AdminEditDoc() {
   const [content, setContent] = useState("");
   const [showPreview, setShowPreview] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [checkComplete, setCheckComplete] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  
-  const { data: adminSession, isLoading: sessionLoading } = trpc.admin.me.useQuery(undefined, {
-    retry: false,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  });
+  const { user, loading: authLoading } = useAuth();
   const { data: savedDoc, isLoading: docLoading } = trpc.admin.getDoc.useQuery(
     { docId },
     { 
-      enabled: !!docId && !!adminSession,
+      enabled: !!docId && !!user && user.role === 'admin',
       retry: false,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
@@ -75,12 +72,22 @@ export default function AdminEditDoc() {
   });
 
   // All useEffect hooks must be at the top level, before any conditional returns
+  // Wait for auth to complete before checking admin status
   useEffect(() => {
-    if (!sessionLoading && !adminSession) {
-      // Redirect to home if not admin
+    if (!authLoading) {
+      const timer = setTimeout(() => {
+        setCheckComplete(true);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [authLoading]);
+
+  // Redirect non-admin users after check is complete
+  useEffect(() => {
+    if (checkComplete && (!user || user.role !== 'admin')) {
       setLocation("/");
     }
-  }, [adminSession, sessionLoading, setLocation]);
+  }, [checkComplete, user, setLocation]);
 
   useEffect(() => {
     if (savedDoc) {
@@ -105,8 +112,8 @@ export default function AdminEditDoc() {
     }
   }, [savedDoc, docId]);
 
-  // Show loading while checking session
-  if (sessionLoading) {
+  // Show loading while checking auth
+  if (authLoading || !checkComplete) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
@@ -117,8 +124,8 @@ export default function AdminEditDoc() {
     );
   }
 
-  // If no admin session, show redirect message
-  if (!adminSession) {
+  // If no admin user, show redirect message
+  if (!user || user.role !== 'admin') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
@@ -128,7 +135,7 @@ export default function AdminEditDoc() {
     );
   }
 
-  if (sessionLoading || docLoading) {
+  if (docLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
@@ -139,9 +146,10 @@ export default function AdminEditDoc() {
     );
   }
 
-  if (!adminSession) {
-    return null;
-  }
+  // Already checked above, this is redundant
+  // if (!user || user.role !== 'admin') {
+  //   return null;
+  // }
 
   // Find document info
   const findDocInfo = (items: any[]): any => {

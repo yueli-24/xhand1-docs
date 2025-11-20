@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";;
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { trpc } from "@/lib/trpc";
@@ -6,17 +6,15 @@ import { useLocation } from "wouter";
 import { toast } from "sonner";
 import { LogOut, FileText, Plus } from "lucide-react";
 import { docsData } from "@/lib/docs";
+import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
+  const { user, loading: authLoading } = useAuth();
+  const [checkComplete, setCheckComplete] = useState(false);
   
-  const { data: adminSession, isLoading: sessionLoading } = trpc.admin.me.useQuery(undefined, {
-    retry: false,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  });
   const { data: savedDocs } = trpc.admin.listDocs.useQuery(undefined, {
-    enabled: !!adminSession, // Only fetch when admin session exists
+    enabled: !!user && user.role === 'admin', // Only fetch when user is admin
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -33,15 +31,27 @@ export default function AdminDashboard() {
     },
   });
 
+  // Wait for auth to complete before checking admin status
   useEffect(() => {
-    if (!sessionLoading && !adminSession) {
-      // Redirect to home if not admin
+    if (!authLoading) {
+      // Give a small delay to ensure OAuth is fully loaded
+      const timer = setTimeout(() => {
+        setCheckComplete(true);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [authLoading]);
+
+  // Redirect non-admin users after check is complete
+  useEffect(() => {
+    if (checkComplete && (!user || user.role !== 'admin')) {
+      console.log('[AdminDashboard] Redirecting non-admin user to home', { user, checkComplete });
       setLocation("/");
     }
-  }, [adminSession, sessionLoading, setLocation]);
+  }, [checkComplete, user, setLocation]);
 
-  // Show loading state while checking session
-  if (sessionLoading) {
+  // Show loading state while checking auth
+  if (authLoading || !checkComplete) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
@@ -52,8 +62,8 @@ export default function AdminDashboard() {
     );
   }
 
-  // If session check is complete and no admin session, don't render (useEffect will redirect)
-  if (!adminSession) {
+  // If check is complete and no admin user, don't render (useEffect will redirect)
+  if (!user || user.role !== 'admin') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
@@ -93,7 +103,7 @@ export default function AdminDashboard() {
             <FileText className="h-6 w-6 text-primary" />
             <div>
               <h1 className="text-lg font-semibold">文档管理系统</h1>
-              <p className="text-sm text-muted-foreground">管理员: {adminSession.username || 'Admin'}</p>
+              <p className="text-sm text-muted-foreground">管理员: {user.name || user.email}</p>
             </div>
           </div>
           <Button
