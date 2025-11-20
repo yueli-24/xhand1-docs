@@ -272,3 +272,10 @@ cd /home/ubuntu/xhand1_docs && git push github main
 - [x] 修复认证逻辑和重定向问题 - 改用useAuth并添加500ms延迟检查
 - [x] 测试admin登录流程 - admin dashboard可正常访问
 - [x] 推送到GitHub
+
+## 修夏admin编辑页面预览模式的DOM嵌套错误
+
+- [x] 检查AdminEditDoc页面中的DOM结构
+- [x] 修复CardDescription和Streamdown的嵌套问题 - 将CardTitle改为<h3>，CardDescription改为<p>
+- [x] 验证修复效果 - 预览模式无错误
+- [ ] 推送到GitHub
