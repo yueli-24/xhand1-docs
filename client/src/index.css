@@ -175,7 +175,8 @@
   }
   
   .prose pre {
-    @apply bg-muted text-foreground p-4 rounded-lg overflow-x-auto mb-4;
+    @apply bg-muted p-4 rounded-lg overflow-x-auto mb-4;
+    color: oklch(0.98 0 0); /* 纯白色，最高对比度 */
   }
   
   .prose pre code {

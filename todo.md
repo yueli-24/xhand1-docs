@@ -278,4 +278,11 @@ cd /home/ubuntu/xhand1_docs && git push github main
 - [x] 检查AdminEditDoc页面中的DOM结构
 - [x] 修复CardDescription和Streamdown的嵌套问题 - 将CardTitle改为<h3>，CardDescription改为<p>
 - [x] 验证修复效果 - 预览模式无错误
+- [x] 推送到GitHub
+
+## 优化代码块字体颜色对比度
+
+- [x] 检查当前代码块样式和颜色对比度
+- [x] 优化prose代码块的颜色和对比度 - 将代码块文字颜色改为纯白色oklch(0.98 0 0)
+- [x] 测试验证效果 - 矩阵代码块清晰可读
 - [ ] 推送到GitHub
