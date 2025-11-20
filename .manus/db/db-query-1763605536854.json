@@ -1,0 +1,25 @@
+{
+  "query": "SELECT SUBSTRING(content, LOCATE('link2', content) - 100, 600) as relevant_content FROM docContents WHERE docId = 'tactile' AND content LIKE '%link2%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3uWwGhDrss3nWjK.e6afd6ae3112 --database gYd3rk4sREcBJavGTcFJNz --execute SELECT SUBSTRING(content, LOCATE('link2', content) - 100, 600) as relevant_content FROM docContents WHERE docId = 'tactile' AND content LIKE '%link2%';",
+  "rows": [
+    {
+      "relevant_content": "（URDF）模型对齐。为此，我们提供了经过坐标转换的测点数据，存储在带有 transformed 标签的 JSON 文件中（例如 points.t16.transformed.json）。其坐标原点为link2原点。"
+    },
+    {
+      "relevant_content": "| 各自手指的link2坐标系（转轴中心点） |"
+    },
+    {
+      "relevant_content": "|----------------------------------|"
+    },
+    {
+      "relevant_content": "| 右手：<br/>[points_t16_transformed.json]<br/>[points_t30_right_hand_transformed.json] | ![1280X1280 (2).PNG](https://d2xsxph8kpxj0f.cloudfront.net/310519663118725548/gYd3rk4sREcBJavGTcFJNz/docs/1763549823071-f87ba4c6780139d8.PNG) |"
+    },
+    {
+      "relevant_content": "| 左手：<br/>[points_t16_transformed.json]<br/>[points_t30_left_hand_transformed.json] | ![1280X1280 (3).PNG](https://d2xsxph8kpxj0f.cloudfront.net/310519663118725548/gYd3rk4sREcBJavGTcFJNz/docs/176"
+    }
+  ],
+  "messages": [],
+  "stdout": "relevant_content\n（URDF）模型对齐。为此，我们提供了经过坐标转换的测点数据，存储在带有 transformed 标签的 JSON 文件中（例如 points.t16.transformed.json）。其坐标原点为link2原点。\n\n| 各自手指的link2坐标系（转轴中心点） |\n|----------------------------------|\n\n| 右手：<br/>[points_t16_transformed.json]<br/>[points_t30_right_hand_transformed.json] | ![1280X1280 (2).PNG](https://d2xsxph8kpxj0f.cloudfront.net/310519663118725548/gYd3rk4sREcBJavGTcFJNz/docs/1763549823071-f87ba4c6780139d8.PNG) |\n\n| 左手：<br/>[points_t16_transformed.json]<br/>[points_t30_left_hand_transformed.json] | ![1280X1280 (3).PNG](https://d2xsxph8kpxj0f.cloudfront.net/310519663118725548/gYd3rk4sREcBJavGTcFJNz/docs/176\n",
+  "stderr": "",
+  "execution_time_ms": 1616
+}

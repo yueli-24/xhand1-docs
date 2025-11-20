@@ -1,0 +1,23 @@
+{
+  "query": "SELECT docId, LEFT(content, 500) as content_preview FROM docContents WHERE docId = 'tactile';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3uWwGhDrss3nWjK.e6afd6ae3112 --database gYd3rk4sREcBJavGTcFJNz --execute SELECT docId, LEFT(content, 500) as content_preview FROM docContents WHERE docId = 'tactile';",
+  "rows": [
+    {
+      "docId": "tactile",
+      "content_preview": "# XHAND1触觉传感器说明文档"
+    }
+  ],
+  "messages": [
+    "> **参考：Xhand 触觉传感器支持材料**",
+    "> **效果预览：https://tactile3d-uhjpkez7.manus.space/**",
+    "## 模组介绍",
+    "XHAND1 触觉传感器模组是一款高度集成的三维触觉感知单元，旨在为灵巧手提供精细、全面的触觉信息。通过集成该模组，灵巧手能够感知并响应与环境和物体的物理交互，从而实现更高级的操控智能。",
+    "### 1.1 主要功能",
+    "传感器的核心功能在于实现对触觉信号的实时采样与读取。这使得灵巧手能够在执行接触和操控任务时，获得关于物体表面特征、接触力分布等关键信息。基于这些数据，灵巧手可以更深入地理解其操作环境，并采取更精确、适应性更强的交互策略。无论是精细装配还是人机协作，触觉传感器模组都能显著提升灵巧手的灵活性与智能化水平。",
+    "### 1.2 工作原理",
+    "XHAND1 触觉传感器采用半柔性结构设计,利用霍尔效应进行精确的力分布测量和多维力数据获取。传感器的多层结构包括弹性层和硬质传感层,以实现高精度的力觉信息捕捉。柔性形变层在接触物体后产生形变,进而改变磁性测点位置;刚性传感层负责将磁性"
+  ],
+  "stdout": "docId\tcontent_preview\ntactile\t# XHAND1触觉传感器说明文档\n\n> **参考：Xhand 触觉传感器支持材料**\n\n> **效果预览：https://tactile3d-uhjpkez7.manus.space/**\n\n## 模组介绍\n\nXHAND1 触觉传感器模组是一款高度集成的三维触觉感知单元，旨在为灵巧手提供精细、全面的触觉信息。通过集成该模组，灵巧手能够感知并响应与环境和物体的物理交互，从而实现更高级的操控智能。\n\n### 1.1 主要功能\n\n传感器的核心功能在于实现对触觉信号的实时采样与读取。这使得灵巧手能够在执行接触和操控任务时，获得关于物体表面特征、接触力分布等关键信息。基于这些数据，灵巧手可以更深入地理解其操作环境，并采取更精确、适应性更强的交互策略。无论是精细装配还是人机协作，触觉传感器模组都能显著提升灵巧手的灵活性与智能化水平。\n\n### 1.2 工作原理\n\nXHAND1 触觉传感器采用半柔性结构设计,利用霍尔效应进行精确的力分布测量和多维力数据获取。传感器的多层结构包括弹性层和硬质传感层,以实现高精度的力觉信息捕捉。柔性形变层在接触物体后产生形变,进而改变磁性测点位置;刚性传感层负责将磁性\n",
+  "stderr": "",
+  "execution_time_ms": 1603
+}

@@ -46,12 +46,13 @@ export default function DocPage() {
   if (doc.children && doc.children.length > 0 && !doc.content) {
     return (
       <DocLayout>
-        <div className="prose prose-slate dark:prose-invert max-w-none">
+        <article className="prose prose-slate dark:prose-invert max-w-none">
           <h1>{doc.title}</h1>
           <p className="lead">
             请从左侧导航栏选择具体的文档页面，或从下方列表中选择：
           </p>
-          <div className="grid gap-4 mt-8">
+        </article>
+        <section className="grid gap-4 mt-8">
             {doc.children.map((child) => (
               <Link key={child.id} href={child.path}>
                 <div className="border rounded-lg p-4 hover:border-primary transition-colors cursor-pointer">
@@ -64,8 +65,7 @@ export default function DocPage() {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
+        </section>
       </DocLayout>
     );
   }

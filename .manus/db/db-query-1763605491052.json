@@ -1,0 +1,22 @@
+{
+  "query": "SHOW TABLES;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3uWwGhDrss3nWjK.e6afd6ae3112 --database gYd3rk4sREcBJavGTcFJNz --execute SHOW TABLES;",
+  "rows": [
+    {
+      "Tables_in_gYd3rk4sREcBJavGTcFJNz": "__drizzle_migrations"
+    },
+    {
+      "Tables_in_gYd3rk4sREcBJavGTcFJNz": "admins"
+    },
+    {
+      "Tables_in_gYd3rk4sREcBJavGTcFJNz": "docContents"
+    },
+    {
+      "Tables_in_gYd3rk4sREcBJavGTcFJNz": "users"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_gYd3rk4sREcBJavGTcFJNz\n__drizzle_migrations\nadmins\ndocContents\nusers\n",
+  "stderr": "",
+  "execution_time_ms": 1612
+}

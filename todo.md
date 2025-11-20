@@ -245,4 +245,22 @@ cd /home/ubuntu/xhand1_docs && git push github main
 - [x] 实现附件拖拽上传
 - [x] 在文档页面显示附件下载链接（Markdown自动渲染）
 - [x] 测试上传功能
+- [x] 推送到GitHub
+
+## 彻底修复所有DOM嵌套错误
+
+- [x] 分析tactile页面DOM嵌套错误的根本原因
+- [x] 检查CardDescription组件的实际渲染
+- [x] 检查是否有其他shadcn/ui组件导致嵌套
+- [x] 修复所有潜在的DOM嵌套问题 - 将DocPage中prose div改为article，分离内部的grid布局
+- [x] 测试所有页面
+- [ ] 推送到GitHub
+
+## 修复Markdown表格中图片无法显示
+
+- [ ] 诊断表格中图片无法显示的原因
+- [ ] 检查Streamdown对表格内图片的支持
+- [ ] 测试不同的Markdown语法
+- [ ] 修复或提供替代方案
+- [ ] 测试修复效果
 - [ ] 推送到GitHub
