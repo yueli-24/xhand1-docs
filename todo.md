@@ -254,7 +254,7 @@ cd /home/ubuntu/xhand1_docs && git push github main
 - [x] 检查是否有其他shadcn/ui组件导致嵌套
 - [x] 修复所有潜在的DOM嵌套问题 - 将DocPage中prose div改为article，分离内部的grid布局
 - [x] 测试所有页面
-- [ ] 推送到GitHub
+- [x] 推送到GitHub
 
 ## 修复Markdown表格中图片无法显示
 
